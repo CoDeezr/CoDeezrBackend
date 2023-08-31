@@ -2,16 +2,17 @@
   "name": "codeezr-backend",
   "version": "0.0.1",
   "description": "Backend of the CoDeezr app",
-  "main": "app.js",
+  "main": "search.js",
   "repository": "",
-  "author": "SAM CLI",
+  "author": "Papa Doudou Gueye",
   "license": "MIT",
   "scripts": {
     "unit": "jest",
     "lint": "eslint '*.ts' --quiet --fix",
     "compile": "tsc",
     "test": "npm run compile && npm run unit",
-    "invoke-search": "sam local invoke SearchTracksFunction --event ../events/event.json"
+    "build": "sam build",
+    "invoke-search": "sam local invoke SearchTracksFunction --event events/event.json"
   },
   "dependencies": {
     "esbuild": "^0.14.14"

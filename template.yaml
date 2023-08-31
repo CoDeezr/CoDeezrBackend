@@ -3,19 +3,19 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   CoDeezr
 
-  Sample SAM Template for CoDeezr
+  CoDeezr music track search app
   
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 30
 
 Resources:
   SearchTracksFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: src/
-      Handler: app.lambdaHandler
+      Handler: search.lambdaHandler
       Runtime: nodejs18.x
       Architectures:
         - x86_64
@@ -32,4 +32,4 @@ Resources:
         Target: "es2020"
         Sourcemap: true
         EntryPoints: 
-        - app.ts
+        - search.ts
