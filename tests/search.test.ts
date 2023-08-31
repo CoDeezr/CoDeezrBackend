@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { lambdaHandler } from '../../src/search';
+import { lambdaHandler } from '../src/search';
 import { expect, describe, it } from '@jest/globals';
 
 describe('Unit test for app handler', function () {
@@ -13,7 +13,7 @@ describe('Unit test for app handler', function () {
             multiValueQueryStringParameters: {},
             path: '/',
             pathParameters: {},
-            queryStringParameters: {},
+            queryStringParameters: { search: 'eminem' },
             requestContext: {
                 accountId: '123456789012',
                 apiId: '1234',
@@ -56,10 +56,6 @@ describe('Unit test for app handler', function () {
         const result: APIGatewayProxyResult = await lambdaHandler(event);
 
         expect(result.statusCode).toEqual(200);
-        expect(result.body).toEqual(
-            JSON.stringify({
-                message: 'Welcome to CoDeezr',
-            }),
-        );
+        expect(result.body).toContain('Eminem');
     });
 });
