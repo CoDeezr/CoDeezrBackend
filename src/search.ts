@@ -13,9 +13,17 @@ import axios from 'axios';
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
-        const { search = 'burna boy', index = 0 } = event.queryStringParameters as any;
-        const res = await axios.get(`https://api.deezer.com/search?q=${search}&index=${index}`);
+        const { q, index = 0 } = event.queryStringParameters ?? {};
+
+        if (!q)
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ wsMessage: 'Search term is required' })
+            }
+
+        const res = await axios.get(`https://api.deezer.com/search?q=${q}&index=${index}`);
         const { data } = res;
+
         return {
             statusCode: 200,
             body: JSON.stringify(data),
@@ -27,9 +35,7 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
         console.log(err);
         return {
             statusCode: 500,
-            body: JSON.stringify({
-                message: 'Server error',
-            }),
+            body: JSON.stringify({ wsMessage: 'Server error' }),
         };
     }
 };
