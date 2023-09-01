@@ -13,6 +13,8 @@
     "test": "npm run compile && npm run unit",
     "build": "sam build",
     "start": "sam local start-api --skip-pull-image",
+    "deploy": "sam deploy --guided",
+    "delete": "sam delete",
     "invoke-search": "sam local invoke SearchTracksFunction --event events/event.json"
   },
   "dependencies": {
