@@ -13,12 +13,15 @@ import axios from 'axios';
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
-        const { search = 'burna boy' } = event.queryStringParameters as any;
-        const res = await axios.get(`https://api.deezer.com/search?q=${search}`);
+        const { search = 'burna boy', index = 0 } = event.queryStringParameters as any;
+        const res = await axios.get(`https://api.deezer.com/search?q=${search}&index=${index}`);
         const { data } = res;
         return {
             statusCode: 200,
             body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            },
         };
     } catch (err) {
         console.log(err);
