@@ -11,6 +11,7 @@
     "lint": "eslint '*.ts' --quiet --fix",
     "compile": "tsc",
     "test": "npm run compile && npm run unit",
+    "validate": "sam validate",
     "build": "sam build",
     "start": "sam local start-api --skip-pull-image",
     "deploy": "sam deploy --guided",
