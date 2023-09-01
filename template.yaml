@@ -11,6 +11,29 @@ Globals:
     Timeout: 30
 
 Resources:
+  CoDeezr:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: dev
+      Description: API wrapper around Deezer API
+      CorsConfiguration:
+        MaxAge: 600
+        AllowMethods:
+          - GET
+          - POST
+          - DELETE
+          - OPTIONS
+          - HEAD
+          - PUT
+          - PATCH
+          - "*"
+        AllowHeaders:
+          - "*"
+        AllowOrigins:
+          - "*"
+        ExposeHeaders:
+          - "*"
+
   SearchTracksFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -21,9 +44,11 @@ Resources:
         - x86_64
       Events:
         SearchTracks:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: HttpApi # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /
+            ApiId:
+              Ref: CoDeezr
+            Path: /search
             Method: get
     Metadata: # Manage esbuild properties
       BuildMethod: esbuild
