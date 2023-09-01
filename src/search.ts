@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import axios from 'axios';
+import { deezerClient } from './client/deezer-client';
 
 /**
  *
@@ -21,7 +21,7 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGat
                 body: JSON.stringify({ wsMessage: 'Search term is required' })
             }
 
-        const res = await axios.get(`https://api.deezer.com/search?q=${q}&index=${index}`);
+        const res = await deezerClient.get(`/search?q=${q}&index=${index}`);
         const { data } = res;
 
         return {
