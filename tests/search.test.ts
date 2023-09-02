@@ -11,9 +11,9 @@ describe('Unit test for app handler', function () {
             isBase64Encoded: false,
             multiValueHeaders: {},
             multiValueQueryStringParameters: {},
-            path: '/',
+            path: '/search',
             pathParameters: {},
-            queryStringParameters: { search: 'eminem' },
+            queryStringParameters: { q: 'eminem' },
             requestContext: {
                 accountId: '123456789012',
                 apiId: '1234',
